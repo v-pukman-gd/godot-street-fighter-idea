@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://hero.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tokio1.png" type="Texture" id=2]
@@ -10,47 +10,66 @@ size = Vector2( 25, 15 )
 flags_unshaded = true
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="PlaneMesh" id=3]
-size = Vector2( 7, 100 )
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 17, 1, 8 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="PlaneMesh" id=4]
+size = Vector2( 100, 7 )
+
+[sub_resource type="SpatialMaterial" id=5]
 flags_use_shadow_to_opacity = true
 params_blend_mode = 2
 params_cull_mode = 2
 albedo_color = Color( 0.603922, 0.603922, 0.603922, 1 )
 
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 100, 1, 7 )
+
 [node name="Game" type="Spatial"]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.840084, 0.542456, 0, -0.542456, 0.840084, 0, 2.36343, 0 )
+transform = Transform( -4.37114e-08, -0.542456, 0.840084, 0, 0.840084, 0.542456, -1, 2.37115e-08, -3.67212e-08, 0.976365, 2.36343, 0.891855 )
 shadow_enabled = true
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.09384, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.976365, 3.09384, 0.891855 )
 
 [node name="OmniLight2" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.09384, 2.90042 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.87678, 3.09384, 0.891855 )
 
 [node name="OmniLight3" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.09384, -2.98493 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.00857, 3.09384, 0.891855 )
 
 [node name="OmniLight4" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88839, 3.09384, -0.0731564 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.903208, 3.09384, 3.78024 )
 
 [node name="OmniLight5" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41121, 3.09384, -0.0731564 )
-
-[node name="Hero" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.650898, 0, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.903208, 3.09384, -1.51936 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, -4.10789, 2.05918, 0.35629 )
+transform = Transform( 1, 0, -1.1921e-07, 0, 1, 0, 1.1921e-07, 0, 1, 1.33265, 2.05918, 4.99974 )
 
 [node name="Bg" type="MeshInstance" parent="."]
-transform = Transform( -1.62921e-07, -1, 1.62921e-07, 0, -1.62921e-07, -1, 1, -1.62921e-07, 2.65431e-14, 5.97611, 2.42005, 0.111559 )
+transform = Transform( 1, -1.1921e-07, 1.94216e-14, 0, -1.62921e-07, -1, 1.1921e-07, 1, -1.62921e-07, 1.08792, 2.42005, -5.08426 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
+[node name="StaticBody" type="StaticBody" parent="Bg"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38419e-07, 2, -2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Bg/StaticBody"]
+shape = SubResource( 3 )
+
 [node name="Floor" type="MeshInstance" parent="."]
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.976365, 0, 0.891855 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 6 )
+
+[node name="Hero" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0 )
