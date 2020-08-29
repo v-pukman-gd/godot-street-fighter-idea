@@ -1,16 +1,12 @@
 extends KinematicBody
 
-
 var gravity = -9.8
 var velocity = Vector3()
 var camera
 
 const SPEED = 3
 const ACCEL = 3
-const DE_ACCEL = 10
-
-#onready var anim = $HeroMesh2/AnimationPlayer
-
+const DE_ACCEL = 20
 
 func _ready():
 	camera = get_node("../Camera").get_global_transform()
@@ -53,13 +49,11 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
 	
-	
-#	var anim_id = "Idle"
-#	if is_moving:
-#		anim_id = "Run"
-#
-#	if anim.get_current_animation() != anim_id:
-#		anim.play(anim_id)
+	if is_moving:
+		var angle = atan2(hv.x, hv.z)
+		var rot = self.get_rotation()
+		rot.y = angle
+		self.set_rotation(rot)
 	
 	var speed = hv.length() / SPEED
-	$HeroMesh/AnimationTreePlayer.blend2_node_set_amount("Idle_Run", speed) #.blend2_node_set_amount("Idle_Run", speed)
+	$HeroMesh/AnimationTreePlayer.blend2_node_set_amount("Idle_Run", speed)
