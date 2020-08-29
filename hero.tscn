@@ -14,4 +14,4 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.894825, 0 )
 shape = SubResource( 1 )
 
-[node name="HeroMesh2" parent="." instance=ExtResource( 2 )]
+[node name="HeroMesh" parent="." instance=ExtResource( 2 )]

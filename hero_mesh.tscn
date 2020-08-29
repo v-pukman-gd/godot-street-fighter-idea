@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Ch24_Body.material" type="Material" id=1]
 [ext_resource path="res://anim/Idle.tres" type="Animation" id=2]
 [ext_resource path="res://anim/Kick.tres" type="Animation" id=3]
 [ext_resource path="res://anim/Jumping.tres" type="Animation" id=4]
 [ext_resource path="res://anim/CrossPunch.tres" type="Animation" id=5]
+[ext_resource path="res://anim/Run.tres" type="Animation" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Ch24Mesh"
@@ -729,8 +730,41 @@ anims/CrossPunch = ExtResource( 5 )
 anims/Idle = ExtResource( 2 )
 anims/Jumping = ExtResource( 4 )
 anims/Kick = ExtResource( 3 )
+anims/Run = ExtResource( 6 )
 anims/default = SubResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.848068, 1.46964, 0 )
 visible = false
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="."]
+master_player = NodePath("../AnimationPlayer")
+active = true
+data = {
+"active": true,
+"connections": [ "Idle_Run", "out", 0, "Idle", "Idle_Run", 0, "Run", "Idle_Run", 1 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"id": "out",
+"position": Vector2( 471, 57 ),
+"type": "output"
+}, {
+"animation": ExtResource( 6 ),
+"filter": [  ],
+"id": "Run",
+"position": Vector2( 121, 147 ),
+"type": "animation"
+}, {
+"animation": ExtResource( 2 ),
+"filter": [  ],
+"id": "Idle",
+"position": Vector2( 151, 15 ),
+"type": "animation"
+}, {
+"blend": 0.0,
+"filter": [  ],
+"id": "Idle_Run",
+"position": Vector2( 311, 50 ),
+"type": "blend2"
+} ]
+}
