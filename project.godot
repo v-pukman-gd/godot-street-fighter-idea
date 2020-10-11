@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ImportAnims_Test"
+config/name="StreetFighterIdea"
 run/main_scene="res://game.tscn"
 config/icon="res://icon.png"
 
